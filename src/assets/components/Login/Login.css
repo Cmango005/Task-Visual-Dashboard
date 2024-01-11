@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  
+}
+
+.wel {
+  font-family: 'Caveat', cursive;
+}
+.login-form{
+  transition: 1s;
+}
+.login-form:hover {
+  transform: scale(1.1);
+  animation: 1s;
+ 
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+  }
+}
