@@ -1,6 +1,6 @@
 
 /* eslint-disable react/no-unescaped-entities */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { FcGoogle } from 'react-icons/fc';
@@ -8,7 +8,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./Login.css"
-
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 
 const Login = () => {
@@ -16,6 +16,12 @@ const Login = () => {
     const { logIn, googleSignIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handlePasswordToggle = () => {
+
+        setShowPassword(!showPassword);
+    };
 
     const handleLogin = e => {
         e.preventDefault();
@@ -82,29 +88,36 @@ const Login = () => {
 
 
             <div style={{ background: "linear-gradient(135deg, #1ee3bf, #6e6bd8)" }} className="flex flex-col rounded-lg items-center justify-center login-form  w-96 p-5  inset-0  border bg-transparent backdrop-blur shadow-2xl">
-                <p className="text-center text-xl font-bold ">Welcome </p>
+                <p className="text-center text-xl font-bold">Welcome </p>
                 <div className="h-96">
-                    <form onSubmit={handleLogin} >
+                    <form onSubmit={handleLogin}>
                         <div className="mb-4">
                             <input
                                 type="email"
                                 placeholder="Email"
                                 name="email"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-72 py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                                 required
                             />
                         </div>
-                        <div className="mb-6">
+                        <div className="mb-6 flex items-center">
                             <input
                                 type="password"
                                 placeholder="Password"
+                                id="password" 
                                 name="password"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow appearance-none border rounded w-72 py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                                 required
                             />
+                            {showPassword ? (
+                                <FaRegEyeSlash id="icon" className="-left-6 relative text-white" onClick={handlePasswordToggle}></FaRegEyeSlash>
+                            ) : (
+                                <FaRegEye id="icon" className="-left-6 relative text-white" onClick={handlePasswordToggle}></FaRegEye>
+                            )}
+
                         </div>
                         <div className="flex items-center justify-between">
-                            <button className="bg-cyan-300 hover:bg-blue-300 w-full  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            <button className="bg-cyan-300 hover:bg-blue-300 w-72  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                                 Login
                             </button>
                         </div>
@@ -112,25 +125,23 @@ const Login = () => {
                     </form>
 
                     <div className="text-center mt-5">
-                        <p className=" font-semibold space-y-1">
-                            Don't have an account? Register Now{' '} <br />
+                        <p className=" font-semibold space-y-1 mr-4">
+                            New on our platform? Create Account{' '} <br />
                             <NavLink to="/registration">
-                                <button className="bg-cyan-300 hover:bg-blue-300 w-full  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                <button className="bg-cyan-300 hover:bg-blue-300 w-72  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                     Registration
                                 </button>
-
                             </NavLink>
                         </p>
                         <p className="text-center mb-1 p-1 ">OR Sign Up With</p>
-                        <button onClick={handleSignInGoogle} className="btn btn-accent flex items-center w-full justify-center gap-3 mb-3 bg-cyan-300 hover:bg-cyan-700 px-4 py-2 rounded">
+                        <button onClick={handleSignInGoogle} className="btn btn-accent flex items-center w-72 justify-center gap-3 mb-3 bg-cyan-300 hover:bg-cyan-700 px-4 py-2 rounded">
                             <FcGoogle /> GOOGLE
                         </button>
                         <ToastContainer></ToastContainer>
                     </div>
                 </div>
-
-
             </div>
+
 
 
             <div>
